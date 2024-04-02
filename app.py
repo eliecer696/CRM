@@ -211,10 +211,9 @@ with gr.Blocks() as demo:
     outputs = [
         image_output,
         xyz_ouput,
-        output_model,
-        output_obj,
+        gr.Model3D(label="Output GLB", interactive=False),
+        gr.File(label="Download 3D Model and Textures", interactive=True), # For ZIP download
     ]
-
 
     text_button.click(fn=check_input_image, inputs=[image_input]).success(
         fn=preprocess_image,
@@ -225,4 +224,4 @@ with gr.Blocks() as demo:
         inputs=inputs,
         outputs=outputs,
     )
-    demo.queue().launch()
+    demo.queue().launch(share=True)
